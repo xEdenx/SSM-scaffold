@@ -5,6 +5,7 @@ import common.ResEnv;
 import entity.Sensor;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import service.IndexService;
 
@@ -26,7 +27,7 @@ public class IndexController {
         return "/index/index";
     }
 
-    @RequestMapping("/fetchSensorsByName")
+    @RequestMapping(value = "/sensor", method = RequestMethod.GET)
     @ResponseBody
     public ResEnv<List<Sensor>> fetchSensorsByName(String name) {
         List<Sensor> sensorList = new ArrayList<>();
@@ -34,10 +35,8 @@ public class IndexController {
         try {
             sensorList = this.indexService.getSensorByName(name);
         } catch (ApplicationException e) {
-//            logger.error(e.getMessage(), e);
             return ResEnv.fail(e.getMessage());
         } catch (Exception e) {
-//            logger.error("获取数据异常", e);
             return ResEnv.fail("获取数据异常");
         }
         return ResEnv.success(sensorList);

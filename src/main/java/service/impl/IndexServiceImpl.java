@@ -3,6 +3,7 @@ package service.impl;
 import dao.SensorMapper;
 import entity.Sensor;
 import entity.SensorExample;
+import org.springframework.stereotype.Service;
 import service.IndexService;
 
 import javax.annotation.Resource;
@@ -11,6 +12,7 @@ import java.util.List;
 /**
  * Created by Tneciv on 2-26-0026.
  */
+@Service("indexService")
 public class IndexServiceImpl implements IndexService {
 
     @Resource
